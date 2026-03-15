@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "name": "Character_Cotroller",
+    "name": "GamplayBehavior",
     "maps": [
         {
             "name": "Player",
@@ -10,7 +10,7 @@
                     "name": "Walk",
                     "type": "Value",
                     "id": "5c62f52d-586d-4f09-9279-dd0de4305e5c",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -25,9 +25,36 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack L",
+                    "name": "Attack",
                     "type": "Button",
                     "id": "f969cc98-237c-4d6a-9ec0-852cbd2237ef",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "a34332ff-2b69-406d-9689-fb4ebc0e61e4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Dodge",
+                    "type": "Button",
+                    "id": "ebbfa585-9c11-4490-aa51-65922047c46f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Block",
+                    "type": "Button",
+                    "id": "ebaad77d-0007-4d38-85ca-2cce9531bf43",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -108,7 +135,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack L",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -119,7 +146,73 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack L",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "41bedf37-e55a-4712-b00e-9253fd8439b1",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4adeeca9-82a8-4bcb-bf70-599bdfc05f08",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "262f60c6-1bea-4175-b95a-478a8bb40177",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0860f49c-61f5-4c6d-8514-6cd554d93cce",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "721d15c5-7aa4-41a9-91df-791307c4942d",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Block",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4661d525-fe36-4a85-98cd-59916bedccd5",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Block",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
