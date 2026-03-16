@@ -96,7 +96,7 @@ public partial class @GamplayBehavior: IInputActionCollection2, IDisposable
                     ""name"": ""Walk"",
                     ""type"": ""Value"",
                     ""id"": ""5c62f52d-586d-4f09-9279-dd0de4305e5c"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
