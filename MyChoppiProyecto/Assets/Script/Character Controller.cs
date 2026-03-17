@@ -34,10 +34,10 @@ public class CharacterController : MonoBehaviour
     {
         inputAction = new GamplayBehavior();
 
-        rb = GetComponent<Rigidbody2D>();
-        an = GetComponent<Animator>();
+        rb = transform.parent.GetComponent<Rigidbody2D>();
+        an = transform.GetComponentInChildren<Animator>();
 
-        cb = GetComponent<CharacterBehavior>();
+        cb = transform.parent.GetComponent<CharacterBehavior>();
 
         m_MoveAction = inputAction.Player.Walk;
         m_JumpAction = inputAction.Player.Jump;
@@ -53,12 +53,11 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        OnFloor();
+
         MoveCharacter();
 
-        if (m_JumpAction.WasPressedThisFrame() && (OnFloor() || SecondJump()))
-        {
-            Jump();
-        }
+        Jump();
 
     }
 
@@ -70,6 +69,18 @@ public class CharacterController : MonoBehaviour
     {
         m_moveAmt = m_MoveAction.ReadValue<float>();
 
+        if (m_moveAmt != 0)
+        {
+            an.SetInteger("AnimState", 1);
+
+            if (m_moveAmt < 0) transform.GetComponentInChildren<SpriteRenderer>().flipX = true;
+            else transform.GetComponentInChildren<SpriteRenderer>().flipX = false;
+
+        } else
+        {
+            an.SetInteger("AnimState", 0);
+        }
+
         Vector2 moveVector = new Vector2(rb.position.x + m_moveAmt * cb.PlayerSpeed * Time.deltaTime,
         rb.position.y);
 
@@ -78,16 +89,18 @@ public class CharacterController : MonoBehaviour
 
     void Jump()
     {
-        rb.AddForce(Vector2.up * cb.PlayerJump, ForceMode2D.Impulse);
+        //m_JumpAction.performed += ctx => 
+
+        //rb.AddForce(Vector2.up * cb.PlayerJump, ForceMode2D.Impulse);
     }
 
     // ----------------------- //
 
 
     // -- Character Behavior Methods -- //
-    bool OnFloor()
+    void OnFloor()
     {
-        return true;
+        an.SetBool("Grounded", true);
     }
 
     bool SecondJump()
