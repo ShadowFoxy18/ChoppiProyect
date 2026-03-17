@@ -843,7 +843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 10
-  playerJump: 5
+  playerJump: 100
   playerSpeedAttack: 3
   firstAttack: 20
   secondAttack: 30

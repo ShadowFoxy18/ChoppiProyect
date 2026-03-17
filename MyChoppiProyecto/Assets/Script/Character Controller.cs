@@ -46,7 +46,8 @@ public class CharacterController : MonoBehaviour
         m_DodgeAction = inputAction.Player.Dodge;
 
 
-
+        m_JumpAction.performed += ctx => Jump();
+        m_JumpAction.canceled -= ctx => Jump();
 
     }
 
@@ -57,7 +58,7 @@ public class CharacterController : MonoBehaviour
 
         MoveCharacter();
 
-        Jump();
+        //Jump();
 
     }
 
@@ -89,9 +90,10 @@ public class CharacterController : MonoBehaviour
 
     void Jump()
     {
-        //m_JumpAction.performed += ctx => 
 
-        //rb.AddForce(Vector2.up * cb.PlayerJump, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * cb.PlayerJump, ForceMode2D.Impulse);
+
+        an.SetTrigger("Jump");
     }
 
     // ----------------------- //
