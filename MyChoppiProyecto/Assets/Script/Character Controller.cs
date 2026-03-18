@@ -26,7 +26,8 @@ public class CharacterController : MonoBehaviour
     InputAction m_DodgeAction;
     InputAction m_BlockAction;
 
-    public bool isAttacking = false;
+
+    public bool invenciblePlayer = false;
 
 
     private void OnEnable() => inputAction.Enable();
@@ -66,8 +67,6 @@ public class CharacterController : MonoBehaviour
     }
 
 
-
-
     // -- Character Actions -- //
     void MoveCharacter()
     {
@@ -95,18 +94,23 @@ public class CharacterController : MonoBehaviour
     {
         m_isJumping = m_JumpAction.triggered;
 
-
         if (m_isJumping)
         {
             an.SetTrigger("Jump");
             rb.AddForce(Vector2.up * cb.PlayerJump, ForceMode2D.Impulse);
         }
-        
-
-       
     }
 
     // ----------------------- //
+
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.transform.CompareTag("Floor"))
+        {
+
+        }
+    }
 
 
     // -- Character Behavior Methods -- //
