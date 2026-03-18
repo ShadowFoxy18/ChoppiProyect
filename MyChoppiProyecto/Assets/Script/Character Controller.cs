@@ -11,6 +11,7 @@ public class CharacterController : MonoBehaviour
 
     float m_moveAmt;
     bool m_isAttacking;
+    bool m_isJumping;
     bool m_isInteracting;
     bool m_isDodge;
     bool m_isBlock;
@@ -24,6 +25,8 @@ public class CharacterController : MonoBehaviour
     InputAction m_InteractAction;
     InputAction m_DodgeAction;
     InputAction m_BlockAction;
+
+    public bool isAttacking = false;
 
 
     private void OnEnable() => inputAction.Enable();
@@ -45,9 +48,9 @@ public class CharacterController : MonoBehaviour
         m_InteractAction = inputAction.Player.Interact;
         m_DodgeAction = inputAction.Player.Dodge;
 
-
+        //m_JumpAction.performed += ctx => m_isJumping = true;
+        //m_JumpAction.performed += ctx => m_isJumping = false;
         m_JumpAction.performed += ctx => Jump();
-        m_JumpAction.canceled -= ctx => Jump();
 
     }
 
@@ -90,10 +93,17 @@ public class CharacterController : MonoBehaviour
 
     void Jump()
     {
+        m_isJumping = m_JumpAction.triggered;
 
-        rb.AddForce(Vector2.up * cb.PlayerJump, ForceMode2D.Impulse);
 
-        an.SetTrigger("Jump");
+        if (m_isJumping)
+        {
+            an.SetTrigger("Jump");
+            rb.AddForce(Vector2.up * cb.PlayerJump, ForceMode2D.Impulse);
+        }
+        
+
+       
     }
 
     // ----------------------- //
