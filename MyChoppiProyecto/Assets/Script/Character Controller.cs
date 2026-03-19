@@ -1,20 +1,28 @@
 using Cainos.LucidEditor;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CharacterController : MonoBehaviour
 {
     CharacterBehavior cb;
+    AttackCharaacter ac;
 
     Rigidbody2D rb;
     Animator an;
 
     float m_moveAmt;
-    bool m_isAttacking;
     bool m_isJumping;
     bool m_isInteracting;
     bool m_isDodge;
     bool m_isBlock;
+
+
+    int actualLife;
+    float porcentageLife;
+
+    int currentAttack = 0;
+    float icd = 0;
 
     // --- Input Actions --- //
     private GamplayBehavior inputAction;
@@ -42,6 +50,9 @@ public class CharacterController : MonoBehaviour
         an = transform.GetComponentInChildren<Animator>();
 
         cb = transform.parent.GetComponent<CharacterBehavior>();
+        ac = GetComponentInChildren<AttackCharaacter>();
+
+        actualLife = cb.PlayerHealth;
 
         m_MoveAction = inputAction.Player.Walk;
         m_JumpAction = inputAction.Player.Jump;
@@ -53,6 +64,8 @@ public class CharacterController : MonoBehaviour
         //m_JumpAction.performed += ctx => m_isJumping = false;
         m_JumpAction.performed += ctx => Jump();
 
+        m_AttackAction.performed += ctx => Attack();
+
     }
 
     // Update is called once per frame
@@ -63,6 +76,13 @@ public class CharacterController : MonoBehaviour
         MoveCharacter();
 
         //Jump();
+
+        if (icd > 0)
+        {
+            icd -= Time.deltaTime;
+        }
+
+
 
     }
 
@@ -101,6 +121,27 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    void Attack()
+    {
+        if (icd <= 0)
+        {
+            ac.Attack(ac.combos[currentAttack]);
+            icd = cb.PlayerSpeedAttack;
+            NextAttack(false);
+        }
+    }
+
+    public void Damage(float damage)
+    {
+        if (!invenciblePlayer)
+        {
+            an.SetTrigger("Hurt");
+            actualLife -= (int)damage;
+
+            CheckLife();
+        }
+    }
+
     // ----------------------- //
 
 
@@ -122,5 +163,29 @@ public class CharacterController : MonoBehaviour
     bool SecondJump()
     {
         return false;
+    }
+
+    void CheckLife()
+    {
+        if (actualLife <= 0)
+        {
+            an.SetTrigger("Death");
+        } else
+        {
+            porcentageLife = actualLife / cb.PlayerHealth;
+        }
+    }
+
+    void NextAttack(bool hevy)
+    {
+        if (hevy)
+        {
+            currentAttack = 2;
+        }
+        else
+        {
+            currentAttack += 1;
+            currentAttack = currentAttack > 2 ? 0 : currentAttack;
+        }
     }
 }

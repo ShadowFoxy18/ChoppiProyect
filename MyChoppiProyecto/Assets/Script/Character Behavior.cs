@@ -10,7 +10,7 @@ public class CharacterBehavior : MonoBehaviour
     [SerializeField] int playerSpeedAttack = 3;
     [SerializeField] int firstAttack = 20;
     [SerializeField] int secondAttack = 30;
-    [SerializeField] int hevyAttack = 60;
+    [SerializeField] int heavyAttack = 60;
     [SerializeField] int playerHealth = 100;
 
 
@@ -25,8 +25,11 @@ public class CharacterBehavior : MonoBehaviour
     //Player damage
     public int FirstAttack => firstAttack;
     public int SecondAttack => secondAttack;
-    public int HevyAttack => hevyAttack;
+    public int HeavyAttack => heavyAttack;
 
     //Player Health
     public int PlayerHealth => playerHealth;
+
+
+
 }
